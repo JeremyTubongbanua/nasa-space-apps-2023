@@ -38,7 +38,7 @@ def main():
         years.append(1993 + i)
     current_year_index = 0
     current_water_level_index = 0
-    current_water_level = water_levels[current_water_level_index] + 34.5
+    current_water_level = water_levels[current_water_level_index]
 
     # platforms
     # (count, x)
@@ -236,17 +236,6 @@ def main():
         for tile in tiles:
             tile.tick(HEIGHT)
 
-        t = 'GMSL: %.2f mm' % current_water_level
-        text.tick(str(t))
-        if text.counter >= text.frequency:
-            current_water_level_index = current_water_level_index + 1
-            if current_water_level_index >= len(water_levels):
-                break
-            current_water_level = water_levels[current_water_level_index] + 34
-
-        print(str(years[current_water_level_index]))
-        text2.tick(str(years[current_water_level_index]))
-
         # draw everything
         draw_tiles_background(window, tiles)
         draw_water_level(window, text)
@@ -270,6 +259,17 @@ def main():
         for platform in platforms:
             if platform.rect.y > HEIGHT:
                 platforms.remove(platform)
+
+        t = 'GMSL: %.2f mm' % current_water_level
+        text.tick(str(t))
+        if text.counter >= text.frequency:
+            current_water_level_index = current_water_level_index + 1
+            if current_water_level_index >= len(water_levels):
+                break
+            current_water_level = water_levels[current_water_level_index]
+
+        print(str(years[current_water_level_index]))
+        text2.tick(str(years[current_water_level_index]))
 
         player.draw(window)
 
