@@ -1,30 +1,28 @@
-import os
-import random
-import math
 import pygame
-from os import listdir
-from os.path import isfile, join
 from sprites.tile import Tile, init_tiles
 from sprites.text import Text
-
 
 def draw_tiles_background(window, tiles):
     window.fill((255, 255, 255))
     for tile in tiles:
         tile.draw(window)
 
-
 def main():
+    # constants
     WIDTH, HEIGHT = 512, 512
 
+    # init pygame stuff
     pygame.init()
     pygame.display.set_caption("Platformer")
 
+    # init window
     window = pygame.display.set_mode((WIDTH, HEIGHT))
 
+    # init stuff needed for game
     tiles = init_tiles(WIDTH, HEIGHT) # for background
     text = Text(0, 0, "Hello World!", "Arial", 32, (0, 0, 0))
 
+    # main game loop
     run = True
     while run:
         # quit if needed
@@ -37,12 +35,11 @@ def main():
         for tile in tiles:
             tile.tick(HEIGHT)
 
-        # draw tiles
+        # draw everything
         draw_tiles_background(window, tiles)
         text.draw(window)
         pygame.display.update()
 
     pygame.quit()
-
 
 main()
