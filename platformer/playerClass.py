@@ -49,7 +49,7 @@ class Player():
         if self.right_pressed and not self.left_pressed:
             self.velX = self.speed
         if self.up_pressed and not self.down_pressed and self.canJump:
-            self.velY = -self.jumpVelocity
+            self.velY = -self.speed
         if self.down_pressed and not self.up_pressed:
             self.velY = self.speed
 

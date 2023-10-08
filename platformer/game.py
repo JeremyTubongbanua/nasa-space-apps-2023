@@ -17,7 +17,7 @@ def draw_water_level(window, text):
 
 def main():
     # constants
-    WIDTH, HEIGHT = 512, 512
+    WIDTH, HEIGHT = 800, 800
 
     # init pygame stuff
     pygame.init()
@@ -25,32 +25,54 @@ def main():
 
     # init window
     window = pygame.display.set_mode((WIDTH, HEIGHT))
-    
+
     # init stuff needed for game
     tiles = init_tiles(WIDTH, HEIGHT)  # for background
     text = Text(0, 0, "0 mm", "Arial", 32, (0, 0, 0))
-    water_levels = [-34.50405405, -30.60405405, -28.03810811, -25.76111111, -21.60594595, -23.74108108, -20.23648649, -16.60702703, -11.15648649, -7.06583333, -3.76675676, -1.62756757, 3.01405405, 4.375, 5.02405405, 7.33194444, 12.43486486, 13.66162162, 12.94459459, 24.01162162, 26.30918919, 30.09111111, 40.91054054, 43.19648649, 44.29756757, 48.46594595, 55.61216216, 56.41333333, 60.87351351, 63.81189189, 64.498]
+    text2 = Text(0, 200, "1993", "Arial", 32, (0, 0, 0))
+    water_levels = [-34.50405405, -30.60405405, -28.03810811, -25.76111111, -21.60594595, -23.74108108, -20.23648649, -16.60702703, -11.15648649, -7.06583333, -3.76675676, -1.62756757, 3.01405405, 4.375, 5.02405405,
+                    7.33194444, 12.43486486, 13.66162162, 12.94459459, 24.01162162, 26.30918919, 30.09111111, 40.91054054, 43.19648649, 44.29756757, 48.46594595, 55.61216216, 56.41333333, 60.87351351, 63.81189189, 64.498]
     current_water_level_index = 0
     current_water_level = water_levels[current_water_level_index]
-    
-    # init player
-    player = Player(HEIGHT/2,WIDTH/2,100,100)
 
-    
+    # platforms
+    platforms_t = [
+        (100, (0, 0)),
+        (100, (100, 0)),
+        (200, (200, 0)),
+        (210, (300, 0)),
+        (220, (300, 0)),
+        (900, (300, 0)),
+        (1000, (300, 0)),
+        (1000, (400, 0)),
+        (1100, (300, 0)),
+        (1100, (350, 0)),
+        (1200, (300, 0)),
+        (1200, (350, 0)),
+        (1300, (300, 0)),
+        (1400, (300, 0)),
+    ]
+    platforms = []
+    c = 0
+
+    # init player
+    player = Player(HEIGHT/2, WIDTH/2, 25, 25)
+
     # # init floor
     # floor = pygame.Rect(0, HEIGHT - 20, WIDTH, 20)
-    
-    # platforms = [Platform(0, HEIGHT - 20, WIDTH, 20)] 
-    
+
+    # platforms = [Platform(0, HEIGHT - 20, WIDTH, 20)]
 
     # main game loop
     clock = pygame.time.Clock()
     run = True
     while run:
-        
+
+        c = c + 1
+
         # 60 fps
         clock.tick(60)
-        
+
         # quit if needed
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -65,19 +87,33 @@ def main():
         if text.counter >= text.frequency:
             current_water_level_index = current_water_level_index + 1
             current_water_level = water_levels[current_water_level_index]
-            
+
+        text2.tick(str())
 
         # draw everything
         draw_tiles_background(window, tiles)
         draw_water_level(window, text)
         pygame.display.update()
-        
+
+        # Draw platforms
+        print(c)
+        for t in platforms_t:
+            count, (x, y) = t
+            if c == count:
+                platform = Platform(x, y, 50, 20)
+                platforms.append(platform)
+
+        for platform in platforms:
+            platform.tick()
+
+        for platform in platforms:
+            platform.draw(window)
+
+        for platform in platforms:
+            if platform.rect.y > HEIGHT:
+                platforms.remove(platform)
+
         player.draw(window)
-            
-        # Handle events (including key events) continuously
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                run = False
 
         # Get the state of all keys (continuous input)
         keys = pygame.key.get_pressed()
@@ -90,9 +126,10 @@ def main():
 
         # Call the tick method of the player to update its state
         player.tick()
-            
+
         # Draw the player
         player.draw(window)
+
 
         pygame.display.update()
 
