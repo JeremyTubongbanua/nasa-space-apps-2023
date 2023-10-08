@@ -5,7 +5,7 @@ import pygame
 from os import listdir
 from os.path import isfile, join
 
-WIDTH, HEIGHT = 500, 500
+WIDTH, HEIGHT = 512, 512
 
 pygame.init()
 
@@ -21,21 +21,25 @@ class Tile(pygame.sprite.Sprite):
     def draw(self, window):
         window.blit(self.IMAGE, (self.rect.x, self.rect.y))
 
-
-def draw_window(window, tiles):
-    window.fill((255, 255, 255))
-    for tile in tiles:
-        tile.draw(window)
-    pygame.display.update()
+    def tick(self):
+        self.rect.y += 1
+        if self.rect.y+self.rect.height > HEIGHT:
+            self.rect.y = -self.rect.height
 
 def init_tiles():
-    TILE_WIDTH = 32
-    TILE_HEIGHT = 32
+    TILE_WIDTH = 16
+    TILE_HEIGHT = 16
     tiles = []
     for i in range(0, WIDTH, TILE_WIDTH):
         for j in range(0, HEIGHT, TILE_HEIGHT):
             tiles.append(Tile(i, j, TILE_WIDTH, TILE_HEIGHT))
     return tiles
+
+def draw_tiles_background(window, tiles):
+    window.fill((255, 255, 255))
+    for tile in tiles:
+        tile.draw(window)
+    pygame.display.update()
 
 def main():
     pygame.init()
@@ -53,13 +57,13 @@ def main():
                 run = False
                 break
 
-            if event.type == pygame.KEYDOWN:
-                for tile in tiles:
-                    tile.rect.y += 32
-                    if tile.rect.y > HEIGHT:
-                        tile.rect.y = -tile.rect.height
-        # draw
-        draw_window(window, tiles)
+        # happens every ticc:
+        for tile in tiles:
+            tile.tick()
+
+
+        # draw tiles
+        draw_tiles_background(window, tiles)
 
     pygame.quit()
 
