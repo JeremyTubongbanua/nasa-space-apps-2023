@@ -13,7 +13,7 @@ def init_tiles(window_width, window_height):
 
 class Tile(pygame.sprite.Sprite):
     COLOR = (255, 0, 0)
-    IMAGE = pygame.image.load(os.path.join("assets", "Background", "Blue.png"))
+    IMAGE = pygame.image.load(os.path.join("assets", "Blue.png"))
 
     def __init__(self, x, y, width, height):
         super().__init__()
