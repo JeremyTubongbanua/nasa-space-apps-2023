@@ -18,7 +18,7 @@ def draw_water_level(window, text):
 
 def main():
     # constants
-    WIDTH, HEIGHT = 800, 800
+    WIDTH, HEIGHT = 513, 513
 
     # init pygame stuff
     pygame.init()
@@ -33,8 +33,12 @@ def main():
     text2 = Text(0, 200, "1993", "Arial", 32, (0, 0, 0))
     water_levels = [-34.50405405, -30.60405405, -28.03810811, -25.76111111, -21.60594595, -23.74108108, -20.23648649, -16.60702703, -11.15648649, -7.06583333, -3.76675676, -1.62756757, 3.01405405, 4.375, 5.02405405,
                     7.33194444, 12.43486486, 13.66162162, 12.94459459, 24.01162162, 26.30918919, 30.09111111, 40.91054054, 43.19648649, 44.29756757, 48.46594595, 55.61216216, 56.41333333, 60.87351351, 63.81189189, 64.498]
+    years = []
+    for i in range(len(water_levels)):
+        years.append(1993 + i)
+    current_year_index = 0
     current_water_level_index = 0
-    current_water_level = water_levels[current_water_level_index]
+    current_water_level = water_levels[current_water_level_index] + 34.5
 
     # platforms
     # (count, x)
@@ -59,27 +63,153 @@ def main():
         (1800, random.randint(0, 800)),
         (1900, random.randint(0, 800)),
         (2000, random.randint(0, 800)),
+        (2000, random.randint(0, 800)),
+        (2000, random.randint(0, 800)),
+        (2000, random.randint(0, 800)),
+        (2000, random.randint(0, 800)),
+        (2000, random.randint(0, 800)),
+        (2100, random.randint(0, 800)),
+        (2100, random.randint(0, 800)),
+        (2100, random.randint(0, 800)),
+        (2100, random.randint(0, 800)),
+        (2100, random.randint(0, 800)),
+        (2100, random.randint(0, 800)),
         (2100, random.randint(0, 800)),
         (2200, random.randint(0, 800)),
         (2300, random.randint(0, 800)),
+        (2300, random.randint(0, 800)),
+        (2300, random.randint(0, 800)),
+        (2300, random.randint(0, 800)),
+        (2300, random.randint(0, 800)),
+        (2300, random.randint(0, 800)),
         (2400, random.randint(0, 800)),
         (2500, random.randint(0, 800)),
+        (2500, random.randint(0, 800)),
+        (2500, random.randint(0, 800)),
+        (2500, random.randint(0, 800)),
+        (2500, random.randint(0, 800)),
+        (2500, random.randint(0, 800)),
+        (2500, random.randint(0, 800)),
+        (2500, random.randint(0, 800)),
+        (2600, random.randint(0, 800)),
+        (2600, random.randint(0, 800)),
+        (2600, random.randint(0, 800)),
+        (2600, random.randint(0, 800)),
+        (2600, random.randint(0, 800)),
+        (2600, random.randint(0, 800)),
+        (2600, random.randint(0, 800)),
+        (2600, random.randint(0, 800)),
+        (2600, random.randint(0, 800)),
+        (2600, random.randint(0, 800)),
+        (2600, random.randint(0, 800)),
+        (2600, random.randint(0, 800)),
+        (2600, random.randint(0, 800)),
+        (2600, random.randint(0, 800)),
         (2600, random.randint(0, 800)),
         (2700, random.randint(0, 800)),
+        (2700, random.randint(0, 800)),
+        (2700, random.randint(0, 800)),
+        (2700, random.randint(0, 800)),
+        (2700, random.randint(0, 800)),
+        (2700, random.randint(0, 800)),
+        (2700, random.randint(0, 800)),
+        (2700, random.randint(0, 800)),
+        (2700, random.randint(0, 800)),
+        (2700, random.randint(0, 800)),
+        (2800, random.randint(0, 800)),
+        (2800, random.randint(0, 800)),
+        (2800, random.randint(0, 800)),
+        (2800, random.randint(0, 800)),
+        (2800, random.randint(0, 800)),
+        (2800, random.randint(0, 800)),
+        (2800, random.randint(0, 800)),
+        (2800, random.randint(0, 800)),
+        (2800, random.randint(0, 800)),
+        (2800, random.randint(0, 800)),
         (2800, random.randint(0, 800)),
         (2900, random.randint(0, 800)),
         (3000, random.randint(0, 800)),
+        (3000, random.randint(0, 800)),
+        (3000, random.randint(0, 800)),
+        (3000, random.randint(0, 800)),
+        (3000, random.randint(0, 800)),
+        (3000, random.randint(0, 800)),
+        (3000, random.randint(0, 800)),
+        (3000, random.randint(0, 800)),
+        (3000, random.randint(0, 800)),
+        (3000, random.randint(0, 800)),
+        (3000, random.randint(0, 800)),
+        (3000, random.randint(0, 800)),
+        (3100, random.randint(0, 800)),
+        (3100, random.randint(0, 800)),
+        (3100, random.randint(0, 800)),
+        (3100, random.randint(0, 800)),
+        (3100, random.randint(0, 800)),
+        (3100, random.randint(0, 800)),
+        (3100, random.randint(0, 800)),
+        (3100, random.randint(0, 800)),
         (3100, random.randint(0, 800)),
         (3200, random.randint(0, 800)),
+        (3200, random.randint(0, 800)),
+        (3200, random.randint(0, 800)),
+        (3200, random.randint(0, 800)),
+        (3200, random.randint(0, 800)),
+        (3200, random.randint(0, 800)),
+        (3200, random.randint(0, 800)),
+        (3200, random.randint(0, 800)),
+        (3200, random.randint(0, 800)),
+        (3200, random.randint(0, 800)),
+        (3300, random.randint(0, 800)),
+        (3300, random.randint(0, 800)),
+        (3300, random.randint(0, 800)),
+        (3300, random.randint(0, 800)),
+        (3300, random.randint(0, 800)),
+        (3300, random.randint(0, 800)),
+        (3300, random.randint(0, 800)),
+        (3300, random.randint(0, 800)),
+        (3300, random.randint(0, 800)),
+        (3300, random.randint(0, 800)),
+        (3300, random.randint(0, 800)),
+        (3300, random.randint(0, 800)),
+        (3300, random.randint(0, 800)),
+        (3300, random.randint(0, 800)),
         (3300, random.randint(0, 800)),
         (3400, random.randint(0, 800)),
+        (3400, random.randint(0, 800)),
+        (3400, random.randint(0, 800)),
+        (3400, random.randint(0, 800)),
+        (3400, random.randint(0, 800)),
+        (3400, random.randint(0, 800)),
+        (3400, random.randint(0, 800)),
+        (3400, random.randint(0, 800)),
+        (3400, random.randint(0, 800)),
+        (3400, random.randint(0, 800)),
+        (3400, random.randint(0, 800)),
+        (3400, random.randint(0, 800)),
+        (3400, random.randint(0, 800)),
+        (3500, random.randint(0, 800)),
+        (3500, random.randint(0, 800)),
+        (3500, random.randint(0, 800)),
+        (3500, random.randint(0, 800)),
+        (3500, random.randint(0, 800)),
+        (3500, random.randint(0, 800)),
+        (3500, random.randint(0, 800)),
+        (3500, random.randint(0, 800)),
+        (3500, random.randint(0, 800)),
+        (3500, random.randint(0, 800)),
+        (3500, random.randint(0, 800)),
+        (3500, random.randint(0, 800)),
+        (3500, random.randint(0, 800)),
+        (3500, random.randint(0, 800)),
+        (3500, random.randint(0, 800)),
+        (3500, random.randint(0, 800)),
         (3500, random.randint(0, 800)),
     ]
     platforms = []
     c = 0
 
     # init player
-    player = Player(HEIGHT/2, WIDTH/2, 25, 25)
+    player = Player(HEIGHT/2, WIDTH/2, 75, 75)
 
     # # init floor
     # floor = pygame.Rect(0, HEIGHT - 20, WIDTH, 20)
@@ -106,18 +236,21 @@ def main():
         for tile in tiles:
             tile.tick(HEIGHT)
 
-        text.tick(str(current_water_level) + ' mm')
+        t = 'GMSL: %.2f mm' % current_water_level
+        text.tick(str(t))
         if text.counter >= text.frequency:
             current_water_level_index = current_water_level_index + 1
             if current_water_level_index >= len(water_levels):
                 break
-            current_water_level = water_levels[current_water_level_index]
+            current_water_level = water_levels[current_water_level_index] + 34
 
-        text2.tick(str())
+        print(str(years[current_water_level_index]))
+        text2.tick(str(years[current_water_level_index]))
 
         # draw everything
         draw_tiles_background(window, tiles)
         draw_water_level(window, text)
+        text2.draw(window)
         pygame.display.update()
 
         # Draw platforms
@@ -157,14 +290,15 @@ def main():
 
         pygame.display.update()
 
-    window.fill((255, 255, 255))
+    # window.fill((255, 255, 255))
 
-    text = Text(WIDTH/2, HEIGHT/2, "GAME OVER", "Arial", 32, (0, 0, 0))
+    text = Text((WIDTH/2) - 100, (HEIGHT/2) - 100,
+                "GAME OVER - You Won!", "Times New Roman", 32, (0, 255, 0))
     text.draw(window)
 
     pygame.display.update()
 
-    pygame.time.delay(5000)
+    pygame.time.delay(8*1000)
 
     pygame.quit()
 

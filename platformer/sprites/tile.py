@@ -3,8 +3,8 @@ import pygame
 import os
 
 def init_tiles(window_width, window_height):
-    TILE_WIDTH = 32
-    TILE_HEIGHT = 32
+    TILE_WIDTH = 512
+    TILE_HEIGHT = 256
     tiles = []
     for i in range(0, window_width, TILE_WIDTH):
         for j in range(0, window_height, TILE_HEIGHT):
@@ -13,7 +13,7 @@ def init_tiles(window_width, window_height):
 
 class Tile(pygame.sprite.Sprite):
     COLOR = (255, 0, 0)
-    IMAGE = pygame.image.load(os.path.join("assets", "latest.png"))
+    IMAGE = pygame.image.load(os.path.join("assets", "sadge.png"))
 
     def __init__(self, x, y, width, height):
         super().__init__()

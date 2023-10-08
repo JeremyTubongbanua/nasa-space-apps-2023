@@ -20,6 +20,13 @@ class Player():
         # Create a rect attribute to represent the player's position and dimensions
         self.rect = pygame.Rect(self.x, self.y, self.width, self.height)
 
+        #  IMAGE FROM ASSETS/FISH.png
+        self.image = pygame.image.load('assets/fish.png')
+        # scale image to 
+        self.image = pygame.transform.scale(self.image, (self.width, self.height))
+
+        # make the sprite the image
+
         # Keys pressed
         self.left_pressed = False
         self.right_pressed = False
@@ -39,7 +46,8 @@ class Player():
 
     def draw(self, window):
         # Draw the player to the window
-        pygame.draw.rect(window, (123, 123, 12), self.rect)
+        # pygame.draw.rect(window, (123, 123, 12), self.rect)
+        window.blit(self.image, (self.x, self.y))
 
     def inputMovement(self):
         self.velX = 0
