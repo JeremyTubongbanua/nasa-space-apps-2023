@@ -3,8 +3,8 @@ import pygame
 import os
 
 def init_tiles(window_width, window_height):
-    TILE_WIDTH = 16
-    TILE_HEIGHT = 16
+    TILE_WIDTH = 32
+    TILE_HEIGHT = 32
     tiles = []
     for i in range(0, window_width, TILE_WIDTH):
         for j in range(0, window_height, TILE_HEIGHT):

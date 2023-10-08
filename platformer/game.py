@@ -7,6 +7,9 @@ def draw_tiles_background(window, tiles):
     for tile in tiles:
         tile.draw(window)
 
+def draw_water_level(window, text):
+    text.draw(window)
+
 def main():
     # constants
     WIDTH, HEIGHT = 512, 512
@@ -20,11 +23,14 @@ def main():
 
     # init stuff needed for game
     tiles = init_tiles(WIDTH, HEIGHT) # for background
-    text = Text(0, 0, "Hello World!", "Arial", 32, (0, 0, 0))
+    text = Text(0, 0, "0 mm", "Arial", 32, (0, 0, 0))
+    current_water_level = 0
 
     # main game loop
+    clock = pygame.time.Clock()
     run = True
     while run:
+        clock.tick(60)
         # quit if needed
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -35,9 +41,13 @@ def main():
         for tile in tiles:
             tile.tick(HEIGHT)
 
+        if text.counter >= text.frequency:
+            current_water_level = current_water_level + 1
+        text.tick(str(current_water_level) + ' mm')
+
         # draw everything
         draw_tiles_background(window, tiles)
-        text.draw(window)
+        draw_water_level(window, text)
         pygame.display.update()
 
     pygame.quit()
