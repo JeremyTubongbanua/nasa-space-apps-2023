@@ -2,7 +2,7 @@ import sys
 
 import pygame
 
-from scripts.entities import load_image
+from scripts.utils import load_image
 from scripts.entities import PhysicsEntity
 
 
@@ -29,7 +29,7 @@ class Game:
         self.movement = [False,False]
         
         self.assets = {
-            'player': load_image('entities/player.png')
+            'player': load_image('player.png')
         }
         
         #! Collision -> when you run into a "rectangle" -> causes something to happen
