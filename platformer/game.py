@@ -3,6 +3,7 @@ from sprites.tile import Tile, init_tiles
 from sprites.text import Text
 from playerClass import Player
 from platformClass import Platform
+import random
 
 
 def draw_tiles_background(window, tiles):
@@ -36,21 +37,43 @@ def main():
     current_water_level = water_levels[current_water_level_index]
 
     # platforms
+    # (count, x)
     platforms_t = [
-        (100, (0, 0)),
-        (100, (100, 0)),
-        (200, (200, 0)),
-        (210, (300, 0)),
-        (220, (300, 0)),
-        (900, (300, 0)),
-        (1000, (300, 0)),
-        (1000, (400, 0)),
-        (1100, (300, 0)),
-        (1100, (350, 0)),
-        (1200, (300, 0)),
-        (1200, (350, 0)),
-        (1300, (300, 0)),
-        (1400, (300, 0)),
+        (100, random.randint(0, 800)),
+        (100, random.randint(0, 800)),
+        (200, random.randint(0, 800)),
+        (210, random.randint(0, 800)),
+        (220, random.randint(0, 800)),
+        (900, random.randint(0, 800)),
+        (1000, random.randint(0, 800)),
+        (1000, random.randint(0, 800)),
+        (1100, random.randint(0, 800)),
+        (1100, random.randint(0, 800)),
+        (1200, random.randint(0, 800)),
+        (1200, random.randint(0, 800)),
+        (1300, random.randint(0, 800)),
+        (1400, random.randint(0, 800)),
+        (1500, random.randint(0, 800)),
+        (1600, random.randint(0, 800)),
+        (1700, random.randint(0, 800)),
+        (1800, random.randint(0, 800)),
+        (1900, random.randint(0, 800)),
+        (2000, random.randint(0, 800)),
+        (2100, random.randint(0, 800)),
+        (2200, random.randint(0, 800)),
+        (2300, random.randint(0, 800)),
+        (2400, random.randint(0, 800)),
+        (2500, random.randint(0, 800)),
+        (2600, random.randint(0, 800)),
+        (2700, random.randint(0, 800)),
+        (2800, random.randint(0, 800)),
+        (2900, random.randint(0, 800)),
+        (3000, random.randint(0, 800)),
+        (3100, random.randint(0, 800)),
+        (3200, random.randint(0, 800)),
+        (3300, random.randint(0, 800)),
+        (3400, random.randint(0, 800)),
+        (3500, random.randint(0, 800)),
     ]
     platforms = []
     c = 0
@@ -86,6 +109,8 @@ def main():
         text.tick(str(current_water_level) + ' mm')
         if text.counter >= text.frequency:
             current_water_level_index = current_water_level_index + 1
+            if current_water_level_index >= len(water_levels):
+                break
             current_water_level = water_levels[current_water_level_index]
 
         text2.tick(str())
@@ -98,9 +123,9 @@ def main():
         # Draw platforms
         print(c)
         for t in platforms_t:
-            count, (x, y) = t
+            count, x = t
             if c == count:
-                platform = Platform(x, y, 50, 20)
+                platform = Platform(x, 0, 50, 20)
                 platforms.append(platform)
 
         for platform in platforms:
@@ -130,8 +155,16 @@ def main():
         # Draw the player
         player.draw(window)
 
-
         pygame.display.update()
+
+    window.fill((255, 255, 255))
+
+    text = Text(WIDTH/2, HEIGHT/2, "GAME OVER", "Arial", 32, (0, 0, 0))
+    text.draw(window)
+
+    pygame.display.update()
+
+    pygame.time.delay(5000)
 
     pygame.quit()
 
