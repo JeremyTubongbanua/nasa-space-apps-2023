@@ -86,7 +86,7 @@ class Game:
                 
                         
             
-            self.screen.blit(pygame.transform.scale(self.display, self.screen.get_size())
+            self.screen.blit(pygame.transform.scale(self.display, self.screen.get_size())),
             pygame.display.update()
             # forces the loop to run at 60fps
             self.clock.tick(60)
