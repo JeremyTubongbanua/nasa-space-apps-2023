@@ -26,6 +26,10 @@ class Game:
 
         # self.img_pos = [150, 260]
         
+        # generates an empty surface/image (all black by default) with specified dimensions
+        # allocate some memory for other uses
+        self.display = pygame.Surface((320,340))
+        
         self.movement = [False,False]
         
         self.assets = {
@@ -45,11 +49,11 @@ class Game:
         while True:
 
             # filling up the screen with a blue color to overwrite old instances of blit/image
-            self.screen.fill((14,219,248))           
+            self.display.fill((14,219,248))           
                 
             #! PLAYER ENTITY STUFF
             self.player.update((self.movement[1] - self.movement[0], 0))
-            self.player.render(self.screen)
+            self.player.render(self.display)
             
             
             # #! Playermodel stuff
@@ -82,6 +86,7 @@ class Game:
                 
                         
             
+            self.screen.blit(pygame.transform.scale(self.display, self.screen.get_size())
             pygame.display.update()
             # forces the loop to run at 60fps
             self.clock.tick(60)
