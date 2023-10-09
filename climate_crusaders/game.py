@@ -3,10 +3,8 @@ import sys
 import os
 import random
 
-# Initialize Pygame
 pygame.init()
 
-# Set up some constants
 WIDTH, HEIGHT = 800, 600
 CRAB_WIDTH, CRAB_HEIGHT = 50, 50
 GROUND_HEIGHT = 50
@@ -17,8 +15,8 @@ CRAB_SPEED = 5
 BROWN = (139, 69, 19)
 PLATFORM_WIDTH, PLATFORM_HEIGHT = CRAB_WIDTH * 2, CRAB_HEIGHT // 2
 black_block = pygame.Rect(0, HEIGHT + 100, WIDTH, CRAB_HEIGHT)
-black_block_speed = 0.3
-black_block_acceleration = 0.001
+black_block_speed = 0.6
+black_block_acceleration = 0.005
 timer = 1993
 timer_array = list(range(1993, 2023))
 water_levels = [-34.50405405, -30.60405405, -28.03810811, -25.76111111, -21.60594595, -23.74108108, -20.23648649, -16.60702703, -11.15648649, -7.06583333, -3.76675676, -1.62756757, 3.01405405, 4.375, 5.02405405,
@@ -27,10 +25,8 @@ water_levels = [-34.50405405, -30.60405405, -28.03810811, -25.76111111, -21.6059
 sand_block = pygame.Rect(0, 600 - 200, WIDTH, 200)
 SAND_COLOR = (194, 178, 128)
 
-# Set up the display
 screen = pygame.display.set_mode((WIDTH, HEIGHT))
 
-# Set up the crab
 crab = pygame.Rect(WIDTH // 2, HEIGHT - CRAB_HEIGHT -
                    GROUND_HEIGHT, CRAB_WIDTH, CRAB_HEIGHT)
 crab_y_speed = 0
@@ -49,21 +45,16 @@ start_button = pygame.Rect(WIDTH//2 - 100, HEIGHT//2 - 200, 200, 50)
 
 
 def draw_menu():
+    
     screen.fill(SKY_BLUE)  # Fill the screen with sky blue
 
-    # Draw the title
     font = pygame.font.Font(None, 74)
-    # text = font.render("Climate Crusaders", 1, (0, 0, 0))
-    # screen.blit(text, (WIDTH//2 - text.get_width() //
-    # 2, HEIGHT//4 - text.get_height()//2))
 
-    # Draw the start button
     pygame.draw.rect(screen, GREEN, start_button)
 
-    # Draw the text for the start button
     font = pygame.font.Font(None, 50)
     text = font.render("Start", 1, (0, 0, 0))
-    screen.blit(text, (WIDTH//2 - 100, HEIGHT//2 - 200))
+    screen.blit(text, (WIDTH//2 - 50, HEIGHT//2 - 190))
     climate_crusaders_image = pygame.image.load(
         os.path.join("assets", "FinalTitle.png"))
     screen.blit(climate_crusaders_image, (WIDTH//2 - climate_crusaders_image.get_width()//2, HEIGHT //
@@ -90,6 +81,9 @@ def main_menu():
 
 def draw_window():
     screen.fill(SKY_BLUE)  # Fill the screen with sky blue
+    background_image = pygame.image.load(os.path.join("assets", "bac.jpg"))
+    background_image = pygame.transform.scale(background_image, (WIDTH, HEIGHT))
+    screen.blit(background_image, (0, 0))
 
     # Draw the timer
     font = pygame.font.Font(None, 50)
@@ -102,29 +96,27 @@ def draw_window():
     year_text_sprite = year_text.render(str(water_levels[timer-1993]), 1, (0, 0, 0))
     screen.blit(year_text_sprite, (10, 50))
 
-    # Draw the crab at a fixed position
     fixed_crab = pygame.Rect(crab.x, HEIGHT // 2, CRAB_WIDTH, CRAB_HEIGHT)
     # pygame.draw.rect(screen, GREEN, fixed_crab)
     crab_image = pygame.image.load(os.path.join("assets", "crab.png"))
     screen.blit(crab_image, fixed_crab)
 
-    # Draw the ground
     fixed_ground = pygame.Rect(
         ground.x, ground.y - crab.y + HEIGHT // 2, ground.width, ground.height)
     pygame.draw.rect(screen, GREEN, fixed_ground)
 
-    # Draw the platforms
     for platform in platforms:
         fixed_platform = pygame.Rect(
             platform.x, platform.y - crab.y + HEIGHT // 2, platform.width, platform.height)
         pygame.draw.rect(screen, BROWN, fixed_platform)
 
-    # pygame.draw.rect(screen, SAND_COLOR, sand_block)  # Replace SAND_COLOR with the RGB color of your sand
 
-    # Draw the black block
     fixed_black_block = pygame.Rect(
         black_block.x, black_block.y - crab.y + HEIGHT // 2, black_block.width, black_block.height)
-    pygame.draw.rect(screen, (0, 105, 148), fixed_black_block)
+    # pygame.draw.rect(screen, (0, 105, 148), fixed_black_block)
+    water_image = pygame.image.load(os.path.join("assets", "water.png"))
+    water_image = pygame.transform.scale(water_image, (1000, 500))
+    screen.blit(water_image, fixed_black_block)
 
 
 
@@ -160,13 +152,10 @@ def main():
         if keys[pygame.K_d]:  # The 'd' key is being held down!
             crab.x += CRAB_SPEED
 
-        # Apply gravity
         crab_y_speed += GRAVITY
 
-        # Move the crab
         crab.y += crab_y_speed
 
-        # Increase the speed of the black block by its acceleration
         black_block_speed += black_block_acceleration
 
         # Move the black block upwards
@@ -186,10 +175,8 @@ def main():
                 crab_y_speed = 0
                 jumping = False
 
-        # Check for collision with black block
 
         if crab.colliderect(black_block):
-            # create game over rectangle image
 
             break
 
